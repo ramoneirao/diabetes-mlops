@@ -1,4 +1,4 @@
-### Projeto: Pipeline de Dados com DVC e MLflow para Machine Learning
+### Projeto: Pipeline de Dados com DVC e MLflow 
 Este projeto demonstra como construir um pipeline completo de machine learning usando DVC (Data Version Control) para versionamento de dados e modelos, e MLflow para rastreamento de experimentos. O pipeline é focado no treinamento de um Random Forest Classifier com o conjunto de dados Pima Indians Diabetes, com etapas claras de pré-processamento, treinamento e avaliação.
 
 Principais características do projeto:

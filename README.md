@@ -34,11 +34,7 @@ O projeto utiliza ferramentas amplamente adotadas no ecossistema de **MLOps**, p
 
 ## Data Pipeline
 
-Espaço reservado para inserir a imagem do pipeline disponível no DagsHub.
-
-
 ![Pipeline DVC](image/data-pipeline.png)
-
 
 ---
 

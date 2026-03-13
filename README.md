@@ -1,80 +1,198 @@
-### Projeto: Pipeline de Dados com DVC e MLflow 
-Este projeto demonstra como construir um pipeline completo de machine learning usando DVC (Data Version Control) para versionamento de dados e modelos, e MLflow para rastreamento de experimentos. O pipeline é focado no treinamento de um Random Forest Classifier com o conjunto de dados Pima Indians Diabetes, com etapas claras de pré-processamento, treinamento e avaliação.
+# Diabetes MLOps Pipeline
 
-Principais características do projeto:
-Data Version Control (DVC):
+Projeto de Machine Learning com práticas de **MLOps** para construção de um pipeline reprodutível de treinamento, versionamento e gerenciamento de experimentos para predição de diabetes.
 
-O DVC é usado para rastrear e versionar o dataset, os modelos e as etapas do pipeline, garantindo reprodutibilidade em diferentes ambientes.
-O pipeline é estruturado em etapas (pré-processamento, treinamento e avaliação) que podem ser reexecutadas automaticamente se qualquer dependência mudar (por exemplo, dados, scripts ou parâmetros).
-O DVC também permite armazenamento remoto de dados (por exemplo, DagsHub, S3) para datasets e modelos grandes.
-Rastreamento de experimentos com MLflow:
+---
 
-O MLflow é usado para rastrear métricas, parâmetros e artefatos dos experimentos.
-Ele registra os hiperparâmetros do modelo (por exemplo, n_estimators, max_depth) e métricas de desempenho como acurácia.
-O MLflow ajuda a comparar diferentes execuções e modelos para otimizar o pipeline de machine learning.
-Etapas do pipeline:
-Pré-processamento:
+# Stacks utilizadas
 
-O script preprocess.py lê o dataset bruto (data/raw/data.csv), realiza um pré-processamento básico (como renomear colunas) e salva os dados processados em data/processed/data.csv.
-Essa etapa garante que os dados sejam processados de forma consistente entre execuções.
-Treinamento:
+![Python](https://img.shields.io/badge/Python-3.10+-blue)
+![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-Machine%20Learning-orange)
+![DVC](https://img.shields.io/badge/DVC-Data%20Versioning-purple)
+![MLflow](https://img.shields.io/badge/MLflow-Experiment%20Tracking-blue)
+![DagsHub](https://img.shields.io/badge/DagsHub-MLOps%20Platform-green)
 
-O script train.py treina um Random Forest Classifier com os dados pré-processados.
-O modelo é salvo em models/random_forest.pkl.
-Os hiperparâmetros e o próprio modelo são registrados no MLflow para rastreamento e comparação.
-Avaliação:
+---
 
-O script evaluate.py carrega o modelo treinado e avalia seu desempenho (acurácia) no dataset.
-As métricas de avaliação são registradas no MLflow para rastreamento.
-Objetivos:
-Reprodutibilidade: ao usar DVC, o pipeline garante que os mesmos dados, parâmetros e código possam reproduzir os mesmos resultados, tornando o fluxo de trabalho confiável e consistente.
-Experimentação: o MLflow permite que usuários rastreiem facilmente diferentes experimentos (com hiperparâmetros variados) e comparem o desempenho dos modelos.
-Colaboração: DVC e MLflow permitem colaboração fluida em equipe, onde diferentes pessoas podem trabalhar no mesmo projeto e rastrear mudanças de forma integrada.
-Casos de uso:
-Equipes de Data Science: equipes podem usar esta estrutura de projeto para rastrear datasets, modelos e experimentos de forma reprodutível e organizada.
-Pesquisa em Machine Learning: pesquisadores podem iterar rapidamente em diferentes experimentos, rastrear métricas de desempenho e gerenciar versões de dados com eficiência.
-Stack de tecnologias:
-Python: linguagem principal para processamento de dados, treinamento e avaliação de modelos.
-DVC: para controle de versão de dados, modelos e etapas do pipeline.
-MLflow: para registro e rastreamento de experimentos, métricas e artefatos de modelo.
-Scikit-learn: para construir e treinar o Random Forest Classifier.
-Este projeto demonstra como gerenciar o ciclo de vida de um projeto de machine learning, garantindo que dados, código, modelos e experimentos sejam rastreados, versionados e reprodutíveis.
+# Descrição
 
-### Para adicionar etapas
+Este projeto demonstra a construção de um **pipeline de Machine Learning com práticas de MLOps**, voltado para prever a probabilidade de diabetes em pacientes com base em variáveis clínicas.
 
-dvc stage add -n preprocess \
-    -p preprocess.input,preprocess.output \
-    -d src/preprocess.py -d data/raw/data.csv \
-    -o data/processed/data.csv \
-    python src/preprocess.py
-	
-	
-dvc stage add -n train \
-    -p train.data,train.model,train.random_state,train.n_estimators,train.max_depth \
-    -d src/train.py -d data/raw/data.csv \
-    -o models/model.pkl \
-    python src/train.py
-	
-dvc stage add -n evaluate \
-    -d src/evaluate.py -d models/model.pkl -d data/raw/data.csv \
-    python src/evaluate.py
+O objetivo principal é apresentar uma arquitetura reprodutível para desenvolvimento de modelos de Machine Learning, incluindo:
 
-### Configuração segura de credenciais (MLflow/DagsHub)
+* versionamento de dados
+* rastreamento de experimentos
+* automação de pipelines
+* gerenciamento de modelos
+* reprodutibilidade do treinamento
 
-Nao salve credenciais no codigo-fonte.
+O projeto utiliza ferramentas amplamente adotadas no ecossistema de **MLOps**, permitindo reproduzir todo o fluxo de desenvolvimento do modelo, desde o processamento dos dados até o treinamento e registro dos experimentos.
 
-1. Copie o arquivo de exemplo e preencha com seus dados:
+---
 
-```bash
-cp .env.example .env
+# Demonstração
+
+## Data Pipeline
+
+Espaço reservado para inserir a imagem do pipeline disponível no DagsHub.
+
+```
+![Pipeline DVC](image/data-pipeline.png)
 ```
 
-2. Exporte as variaveis no terminal antes de executar o treino:
+---
+
+# Tecnologias utilizadas
+
+O projeto utiliza as seguintes tecnologias:
+
+**Linguagem**
+
+* Python
+
+**Machine Learning**
+
+* Scikit-learn
+
+**MLOps**
+
+* DVC — versionamento de dados e pipelines
+* MLflow — rastreamento de experimentos e métricas
+* DagsHub — gerenciamento remoto de experimentos
+
+
+---
+
+# Instalação e configuração
+
+## 1. Clonar o repositório
 
 ```bash
-export MLFLOW_TRACKING_URI="https://dagshub.com/seu_usuario/seu_repo.mlflow"
-export MLFLOW_TRACKING_USERNAME="seu_usuario"
-export MLFLOW_TRACKING_PASSWORD="seu_token"
+git clone https://github.com/ramoneirao/diabetes-mlops.git
+
+cd diabetes-mlops
 ```
 
-O arquivo `.env` esta no `.gitignore` e nao deve ser enviado para o GitHub.
+---
+
+## 2. Criar ambiente virtual
+
+Linux / Mac
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+Windows
+
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+```
+
+---
+
+## 3. Instalar dependências
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## 4. Baixar dados versionados
+
+Caso o projeto utilize DVC com armazenamento remoto:
+
+```bash
+dvc pull
+```
+
+---
+
+# Como usar
+
+## Executar o pipeline de treinamento
+
+O pipeline pode ser executado utilizando DVC:
+
+```bash
+dvc repro
+```
+
+Esse comando executa automaticamente todas as etapas definidas no pipeline.
+
+Exemplo de etapas comuns:
+
+* preparação dos dados
+* engenharia de features
+* treinamento do modelo
+* avaliação do modelo
+
+---
+
+# Estrutura do projeto
+
+```
+diabetes-mlops
+│
+├── data
+│   ├── raw
+│   ├── processed
+│
+├── models
+│
+│
+├── src
+│   ├── init
+│   ├── evaluate
+│   ├── preprocess
+│   └── train
+│
+├── dvc.yaml
+├── params.yaml
+├── requirements.txt
+└── README.md
+```
+
+---
+
+# Contribuição
+
+Contribuições são bem-vindas.
+
+Para contribuir:
+
+1. Faça um fork do repositório
+2. Crie uma branch
+
+```bash
+git checkout -b feature/minha-feature
+```
+
+3. Faça commit das alterações
+
+```bash
+git commit -m "feat: nova funcionalidade"
+```
+
+4. Envie para o repositório
+
+```bash
+git push origin feature/minha-feature
+```
+
+5. Abra um Pull Request.
+
+
+---
+👨‍💻 Author
+
+Ramon Neirão Mendes
+
+GitHub 
+https://github.com/ramoneirao
+
+DagsHub
+https://dagshub.com/ramoneirao

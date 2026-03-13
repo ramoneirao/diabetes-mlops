@@ -58,3 +58,23 @@ dvc stage add -n train \
 dvc stage add -n evaluate \
     -d src/evaluate.py -d models/model.pkl -d data/raw/data.csv \
     python src/evaluate.py
+
+### Configuração segura de credenciais (MLflow/DagsHub)
+
+Nao salve credenciais no codigo-fonte.
+
+1. Copie o arquivo de exemplo e preencha com seus dados:
+
+```bash
+cp .env.example .env
+```
+
+2. Exporte as variaveis no terminal antes de executar o treino:
+
+```bash
+export MLFLOW_TRACKING_URI="https://dagshub.com/seu_usuario/seu_repo.mlflow"
+export MLFLOW_TRACKING_USERNAME="seu_usuario"
+export MLFLOW_TRACKING_PASSWORD="seu_token"
+```
+
+O arquivo `.env` esta no `.gitignore` e nao deve ser enviado para o GitHub.
